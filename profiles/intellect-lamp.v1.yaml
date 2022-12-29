@@ -1,0 +1,36 @@
+# hello-world-profile
+name: intellect-lamp.v1
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  categories:
+  - name: Light
+preferences:
+  - name: "hosts"
+    title: "Lamp Hosts"
+    description: "Comma separated"
+    required: true
+    preferenceType: string
+    definition:
+      stringType: text
+      default: "http://192.168.0.20/json,http://192.168.0.246/json"
+  - name: "standardModePreset"
+    title: "Standard Mode Preset"
+    description: "Sets the Standard Mode Preset (1-65535)"
+    required: true
+    preferenceType: integer
+    definition:
+      minimum: 1
+      maximum: 65535
+      default: 1
+  - name: "nightModePreset"
+    title: "Night Mode Preset"
+    description: "Sets the Night Mode Preset (1-65535)"
+    required: false
+    preferenceType: integer
+    definition:
+      minimum: 1
+      maximum: 65535
+      default: 1

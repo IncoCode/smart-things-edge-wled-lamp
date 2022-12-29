@@ -1,0 +1,5 @@
+name: 'Intellect Lamp'
+packageKey: 'com.incocode.intellectlamp'
+permissions:
+  discovery: {}
+  lan: {}

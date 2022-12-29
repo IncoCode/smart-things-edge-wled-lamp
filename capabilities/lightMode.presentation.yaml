@@ -1,0 +1,56 @@
+dashboard:
+  states: []
+  actions: []
+detailView:
+  - label: Light Mode
+    displayType: list
+    list:
+      command:
+        name: setMode
+        alternatives:
+          - key: normal
+            value: normal
+            type: active
+          - key: night
+            value: night
+            type: active
+        argumentType: string
+      state:
+        value: lightMode.value
+        valueType: string
+        alternatives:
+          - key: normal
+            value: normal
+            type: active
+          - key: night
+            value: night
+            type: active
+automation:
+  conditions:
+    - label: Light Mode
+      displayType: list
+      list:
+        alternatives:
+          - key: normal
+            value: normal
+            type: active
+          - key: night
+            value: night
+            type: active
+        value: lightMode.value
+        valueType: string
+  actions:
+    - label: Light Mode
+      displayType: list
+      list:
+        alternatives:
+          - key: normal
+            value: normal
+            type: active
+          - key: night
+            value: night
+            type: active
+        command: setMode
+        argumentType: string
+id: signalonion37562.lightMode
+version: 1

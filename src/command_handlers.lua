@@ -1,10 +1,12 @@
 local log = require "log"
 local capabilities = require "st.capabilities"
+local lightMode = capabilities["signalonion37562.lightMode"]
 local cosock = require "cosock"
 -- local http = require "socket.http"
 local http = cosock.asyncify "socket.http"
 local ltn12 = require "ltn12"
 local preferencesMap = require "preferences"
+local inspect = require('inspect')
 
 local command_handlers = {}
 
@@ -43,8 +45,7 @@ function command_handlers.switch_on(driver, device, command)
   local is_change_status = true
 
   for _, host in ipairs(preferencesMap.hosts) do
-    local normalModePreset = preferencesMap.standardModePreset
-    local req = string.format("{\"on\":true,\"ps\":%d}", normalModePreset)
+    local req = "{\"on\":true}"
     local status = send_request(device, req, host)
     log.debug(string.format("[%s] calling set_power(on): status = [%s]", device.device_network_id, status))
 
@@ -75,6 +76,39 @@ function command_handlers.switch_off(driver, device, command)
 
   if (is_change_status) then
     device:emit_event(capabilities.switch.switch.off())
+  end
+end
+
+function command_handlers.set_mode(driver, device, command)
+  local value = command.args.lightMode
+  log.debug(string.format("[%s] calling set_mode, command value = %s, command = %s", device.device_network_id, value, inspect(command)))
+
+  local is_change_status = true
+  local isNight = value == 'night'
+  local isNormal = value == 'normal'
+  local presetId = 0
+  if isNight then
+    presetId = preferencesMap.nightModePreset
+  elseif isNormal then
+    presetId = preferencesMap.standardModePreset
+  end
+
+  for _, host in ipairs(preferencesMap.hosts) do
+    local req = string.format("{\"ps\":%d}", presetId)
+    local status = send_request(device, req, host)
+    log.debug(string.format("[%s] calling change playlist: status = [%s]", device.device_network_id, status))
+
+    if (status ~= 200) then
+      is_change_status = false
+    end
+  end
+
+  if is_change_status then
+    if (isNormal) then
+      device:emit_event(lightMode.lightMode.normal())
+    elseif (isNight) then
+      device:emit_event(lightMode.lightMode.night())
+    end
   end
 end
 

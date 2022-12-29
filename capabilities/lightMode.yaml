@@ -1,0 +1,30 @@
+id: signalonion37562.lightMode
+version: 1
+status: proposed
+name: Light Mode
+ephemeral: false
+attributes:
+  lightMode:
+    schema:
+      type: object
+      properties:
+        value:
+          type: string
+          enum:
+            - normal
+            - night
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+commands:
+  setMode:
+    name: setMode
+    arguments:
+      - name: lightMode
+        optional: false
+        schema:
+          type: string
+          enum:
+            - normal
+            - night

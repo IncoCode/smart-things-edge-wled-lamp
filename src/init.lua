@@ -1,7 +1,9 @@
 -- require st provided libraries
 local capabilities = require "st.capabilities"
+local lightMode = capabilities["signalonion37562.lightMode"]
 local Driver = require "st.driver"
 local log = require "log"
+local inspect = require('inspect')
 
 -- require custom handlers from driver package
 local command_handlers = require "command_handlers"
@@ -17,6 +19,8 @@ local function device_added(driver, device)
 
   -- set a default or queried state for each capability attribute
   device:emit_event(capabilities.switch.switch.on())
+
+  device:emit_event(lightMode.lightMode.normal())
 end
 
 
@@ -60,6 +64,9 @@ local intellect_lamp_driver = Driver("intellect_lamp", {
     [capabilities.switch.ID] = {
       [capabilities.switch.commands.on.NAME] = command_handlers.switch_on,
       [capabilities.switch.commands.off.NAME] = command_handlers.switch_off,
+    },
+    [lightMode.ID] = {
+      [lightMode.commands.setMode.NAME] = command_handlers.set_mode,
     },
   }
 })

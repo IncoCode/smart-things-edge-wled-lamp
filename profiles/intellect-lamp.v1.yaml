@@ -1,9 +1,10 @@
-# hello-world-profile
 name: intellect-lamp.v1
 components:
 - id: main
   capabilities:
   - id: switch
+    version: 1
+  - id: signalonion37562.lightMode
     version: 1
   categories:
   - name: Light

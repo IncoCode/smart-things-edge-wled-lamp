@@ -1,0 +1,36 @@
+mnmn: SmartThingsCommunity
+vid: 85fd8cbd-8425-3e3f-a388-fffb9ef9d25a
+version: 0.0.1
+type: profile
+dashboard:
+  states: []
+  actions: []
+  basicPlus: []
+detailView:
+  - component: main
+    capability: signalonion37562.lightMode
+    version: 1
+    values: []
+    patch: []
+  - component: main
+    capability: switch
+    version: 1
+    values: []
+    patch: []
+automation:
+  conditions:
+    - component: main
+      capability: signalonion37562.lightMode
+      version: 1
+      values: []
+      patch: []
+      exclusion: []
+  actions:
+    - component: main
+      capability: signalonion37562.lightMode
+      version: 1
+      values: []
+      patch: []
+      exclusion: []
+presentationId: 85fd8cbd-8425-3e3f-a388-fffb9ef9d25a
+manufacturerName: SmartThingsCommunity

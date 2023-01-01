@@ -22,3 +22,8 @@ Steps to get the driver working:
 1. Install the driver.
 1. Reinstall the affected device.
 1. Sometimes I also need to reboot the Hub and reinstall the device again.
+
+## Packages
+
+- https://github.com/rxi/json.lua
+- https://github.com/kikito/inspect.lua

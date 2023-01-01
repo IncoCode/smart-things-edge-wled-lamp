@@ -1,7 +1,6 @@
-# Hello World Example
+# Intellect UA Lamp
 
-This example is used in the [Get Started with SmartThings Edge](https://developer-preview.smartthings.com/docs/devices/hub-connected/get-started)
-guide.
+Simple SmartThings Edge driver for a WLED Led Lamp [Intellect UA](https://www.intellect-ua.com/).
 
 ## Shortcuts
 
@@ -14,6 +13,7 @@ Hub should be subscribed on a channel where a driver is gonna be published.
 `smartthings presentation:device-config:create -i presentation/intellect-lamp.presentation.yaml` - creates device config.
 
 Steps to get the driver working:
+
 1. Create a new capability.
 1. Create a new capability presentation.
 1. Create a new device-config.

@@ -127,7 +127,7 @@ function command_handlers.update_state_timer(driver, device)
       sink = ltn12.sink.table(response)
     }
 
-    log.debug(string.format("[%s] device status response code = %d, response = %s", device.device_network_id, code, inspect(response)))
+    log.debug(string.format("[%s] device status response code = %s, response = %s", device.device_network_id, tostring(code), inspect(response)))
     if code ~= 200 then
       device:offline()
       break

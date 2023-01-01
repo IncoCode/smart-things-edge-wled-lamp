@@ -48,9 +48,6 @@ local function device_init(driver, device)
     end,
     "Update state timer"
   )
-
-  -- mark device as online so it can be controlled from the app
-  device:online()
 end
 
 -- this is called when a device is removed by the cloud and synchronized down to the hub

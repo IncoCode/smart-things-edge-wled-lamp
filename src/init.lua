@@ -15,7 +15,7 @@ local preferencesMap = require "preferences"
 -----------------------------------------------------------------
 -- this is called once a device is added by the cloud and synchronized down to the hub
 local function device_added(driver, device)
-  log.info("[" .. device.id .. "] Adding new Hello World device")
+  log.info("[" .. device.id .. "] Adding new Intellect UA Lamp device")
 
   -- set a default or queried state for each capability attribute
   device:emit_event(capabilities.switch.switch.on())
@@ -39,8 +39,15 @@ end
 
 -- this is called both when a device is added (but after `added`) and after a hub reboots.
 local function device_init(driver, device)
-  log.info("[" .. device.id .. "] Initializing Hello World device")
+  log.info("[" .. device.id .. "] Initializing Intellect UA Lamp device")
   device_info_changed(driver, device, nil, nil)
+  device.thread:call_on_schedule(
+    preferencesMap.updateStateTimeoutSec,
+    function ()
+      command_handlers.update_state_timer(driver, device)
+    end,
+    "Update state timer"
+  )
 
   -- mark device as online so it can be controlled from the app
   device:online()
@@ -48,7 +55,11 @@ end
 
 -- this is called when a device is removed by the cloud and synchronized down to the hub
 local function device_removed(driver, device)
-  log.info("[" .. device.id .. "] Removing Hello World device")
+  log.info("[" .. device.id .. "] Removing Intellect UA Lamp device")
+
+  for timer in pairs(device.thread.timers) do
+    device.thread:cancel_timer(timer)
+  end
 end
 
 -- create the driver object

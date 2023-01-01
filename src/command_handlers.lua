@@ -2,11 +2,11 @@ local log = require "log"
 local capabilities = require "st.capabilities"
 local lightMode = capabilities["signalonion37562.lightMode"]
 local cosock = require "cosock"
--- local http = require "socket.http"
 local http = cosock.asyncify "socket.http"
 local ltn12 = require "ltn12"
 local preferencesMap = require "preferences"
 local inspect = require('inspect')
+local json = require "json"
 
 local command_handlers = {}
 
@@ -108,6 +108,36 @@ function command_handlers.set_mode(driver, device, command)
       device:emit_event(lightMode.lightMode.normal())
     elseif (isNight) then
       device:emit_event(lightMode.lightMode.night())
+    end
+  end
+end
+
+function command_handlers.update_state_timer(driver, device)
+  log.debug(string.format("[%s] checking device status...", device.device_network_id))
+
+  for _, host in ipairs(preferencesMap.hosts) do
+    local response = {}
+    local success, code, headers, status = http.request {
+      method = "GET",
+      url = host,
+      headers =
+              {
+                      ["Accept"] = "*/*",
+              },
+      sink = ltn12.sink.table(response)
+    }
+
+    log.debug(string.format("[%s] device status response code = %d, response = %s", device.device_network_id, code, inspect(response)))
+    if code ~= 200 then
+      device:offline()
+      break
+    elseif code == 200 then
+      local decodedResponse = json.decode(table.concat(response))
+      if decodedResponse.state.on then
+        device:emit_event(capabilities.switch.switch.on())
+      else
+        device:emit_event(capabilities.switch.switch.off())
+      end
     end
   end
 end

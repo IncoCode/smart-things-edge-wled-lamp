@@ -4,7 +4,7 @@ local discovery = {}
 -- handle discovery events, normally you'd try to discover devices on your
 -- network in a loop until calling `should_continue()` returns false.
 function discovery.handle_discovery(driver, _should_continue)
-  log.info("Starting Hello World Discovery")
+  log.info("Starting Intellect UA Lamp Discovery")
 
   local metadata = {
     type = "LAN",

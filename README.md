@@ -27,3 +27,8 @@ Steps to get the driver working:
 
 - https://github.com/rxi/json.lua
 - https://github.com/kikito/inspect.lua
+
+## Documentation
+
+- https://developer.smartthings.com/docs/devices/device-basics
+- https://developer.smartthings.com/docs/edge-device-drivers/driver.html

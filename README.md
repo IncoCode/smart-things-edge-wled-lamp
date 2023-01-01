@@ -6,11 +6,11 @@ Simple SmartThings Edge driver for a WLED Led Lamp [Intellect UA](https://www.in
 
 Hub should be subscribed on a channel where a driver is gonna be published.
 
-`smartthings edge:drivers:package intellect-lamp` - compiles the driver.
-`smartthings edge:channels:assign` - assigns to a channel
-`smartthings edge:drivers:install` - installs on a hub.
-`smartthings capabilities:presentation:update -i ./capabilities/lightMode.presentation.yaml` - updates the presentation of a capability.
-`smartthings presentation:device-config:create -i presentation/intellect-lamp.presentation.yaml` - creates device config.
+`smartthings edge:drivers:package intellect-lamp` - compiles the driver.<br />
+`smartthings edge:channels:assign` - assigns to a channel<br />
+`smartthings edge:drivers:install` - installs on a hub.<br />
+`smartthings capabilities:presentation:update -i ./capabilities/lightMode.presentation.yaml` - updates the presentation of a capability.<br />
+`smartthings presentation:device-config:create -i presentation/intellect-lamp.presentation.yaml` - creates device config.<br />
 
 Steps to get the driver working:
 
